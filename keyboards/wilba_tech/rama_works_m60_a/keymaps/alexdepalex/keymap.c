@@ -2,8 +2,8 @@
 #include QMK_KEYBOARD_H
 
 enum userspace_layers {
-  _MAC,
   _WIN,
+  _MAC,
   _FN1,
   _FN3,
   _NAV,
