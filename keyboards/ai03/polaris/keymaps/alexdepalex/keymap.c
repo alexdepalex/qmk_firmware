@@ -28,6 +28,7 @@ enum custom_keycodes {
   LX_PSTE,
   LX_SMAC,
   LX_SWIN,
+  LX_TOKEN
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -53,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL,           KC_LALT, KC_LGUI,          KC_SPC,           KC_SPC,           KC_SPC,                    KC_RGUI, KC_RALT, KC_APP,  KC_RCTL
   ),
   [_NAV] = LAYOUT_all( /* Navigation */
-    RESET,   LX_SMAC, LX_SWIN, KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,     KC_F11,  KC_F12,  KC_DEL,  KC_BSPC,
+    RESET,   LX_SMAC, LX_SWIN, KC_F3,   KC_F4,   KC_F5,      KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,     KC_F11,  KC_F12,  KC_DEL,  LX_TOKEN,
     _______, _______, _______, _______, _______, KC_MS_BTN1, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R,  KC_MS_BTN2, _______, _______,          _______,
     _______, _______, _______, _______, _______, _______,    KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______,    _______,                   _______,
     _______, _______, _______, _______, LX_COPY, LX_PSTE,    _______, _______, _______, _______,  _______,    _______,          _______, _______,
@@ -94,6 +95,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_DOWN(X_LSHIFT)SS_TAP(X_INSERT)SS_UP(X_LSHIFT));
       } else {
         // when keycode LX_PSTE is released
+      }
+      break;
+    case LX_TOKEN:
+      if (record->event.pressed) {
+        SEND_STRING(ADP_PSTOKEN);
       }
       break;
   }
